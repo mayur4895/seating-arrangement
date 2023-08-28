@@ -1,0 +1,4 @@
+
+.input{
+    @apply:border-b w-full bg-transparent relative  h-14 px-8 outline-none  focus:border-b-teal-500
+   }
