@@ -23,9 +23,8 @@ export default function  adminlogin(){
           console.log(values);
           action.resetForm();
            alert("login Successfuly"); 
-           useRouter().push('/admin/adminlogin');
            const router = useRouter();
-           router.push('/admin/adminlogin');
+           router.push('/dashboard');
            
         }
       })
