@@ -138,6 +138,8 @@
   background: var(--tile-border);
 }
 
+ 
+
 /* Inner Square */
 .thirteen::after {
   inset: 0;

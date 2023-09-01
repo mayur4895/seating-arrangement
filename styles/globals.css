@@ -5,9 +5,17 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  padding: 0;
+  margin: 0;
+}
+
 
 html,body{
   font-family: "poppins",sans-serif;
 }
 
 
+.dashboard_pannel{ 
+   @apply:w-1/4  h-screen  fixed bg-gray-900 top-0 right-0;
+}

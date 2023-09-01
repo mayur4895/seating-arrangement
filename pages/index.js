@@ -26,7 +26,7 @@ const [visible,setvisible] = useState(false);
 <div className='container flex gap-4  justify-center items-center'>
  
 <button className="my-5 w-80 flex text-md-w-6/3 justify-center bg-teal-500 hover:bg-green-50 hover:text-teal-500 border border-teal-500 gap-2  px-6 py-2 rounded-sm text-white" >Student</button>
-<Link href={"admin/adminlogin"}><button className="my-5 w-80 flex text-md-w-6/3 justify-center bg-teal-500 hover:bg-green-50 hover:text-teal-500 border border-teal-500 gap-2  px-6 py-2 rounded-sm text-white" >Admin</button></Link>
+<Link href={"admin/"}><button className="my-5 w-80 flex text-md-w-6/3 justify-center bg-teal-500 hover:bg-green-50 hover:text-teal-500 border border-teal-500 gap-2  px-6 py-2 rounded-sm text-white" >Admin</button></Link>
 </div>
  </div> 
  

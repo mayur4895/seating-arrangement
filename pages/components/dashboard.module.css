@@ -1,0 +1,34 @@
+ 
+
+ 
+.pannel{ 
+    @apply    sm:w-2/4  lg:w-1/4  h-screen  fixed bg-gray-900 top-0 right-0 z-20;
+  }
+  
+  
+  .active_link{
+    @apply text-white py-2  bg-slate-500 w-full   hover:bg-slate-500 px-4  hover:border-l-yellow-500 border-l-2    mb-2 cursor-pointer  
+ 
+  }
+
+  ._link{
+    @apply text-white py-2  hover:bg-slate-500 px-4  hover:border-l-yellow-500 border-l-2 border-l-transparent  mb-2 cursor-pointer
+  }
+
+  .icon{
+    @apply absolute top-1/3 left-0 text-gray-500;
+  }
+
+
+  .input{
+    @apply border-b w-full bg-transparent  h-14 px-8 outline-none  focus:border-b-teal-500
+  }
+
+  .button1{
+    @apply border   mt-5 cursor-pointer   bg-emerald-400 text-white py-2 px-20 outline-none rounded-sm hover:bg-emerald-50 border-emerald-400 hover:text-black transition
+  }
+
+
+  .td{
+    @apply border border-slate-300 p-3
+  }
