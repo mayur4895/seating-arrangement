@@ -2,7 +2,7 @@
 import  Dashboard from "../../../components/dashboard_pannel";
 import Addstudnet from "../../../components/addstudentform";
 import { useDispatch ,useSelector} from "react-redux";
-import { BiDotsVerticalRounded } from "react-icons/bi";
+import { BiDotsVerticalRounded ,BiCustomize} from "react-icons/bi";
 import { showpannel } from "@/redux/slices/dashboardslice";
 export default function  addStudent() {
 
@@ -16,7 +16,7 @@ export default function  addStudent() {
       <div className=" mx-auto   h-screen flex w-full   ">
  
      <Addstudnet/>
-     {    visible ? <Dashboard/> : <button className="cursor-pointer   py-3 fixed top-3 right-3 " onClick={dispaly}><BiDotsVerticalRounded size={25}></BiDotsVerticalRounded></button> }
+     {    visible ? <Dashboard/> :<button className="cursor-pointer   py-3 fixed top-3 right-5 " onClick={dispaly}><BiCustomize size={25}/></button> }
       </div>
     </main>
     </>

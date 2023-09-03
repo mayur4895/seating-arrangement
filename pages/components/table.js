@@ -3,19 +3,28 @@
 import styles from "./dashboard.module.css"
 import Link from "next/link";
 import { useFormik } from "formik";   
+ import { useQuery  ,useMutation} from "react-query";
+import { deleteStudent, getStudents } from "@/lib/helper";
+  import { BiTrashAlt ,BiEditAlt } from "react-icons/bi";
+export default function table(){ 
+
+
  
-export default function table(){
+
+ 
+    const {isLoading,isError,data,error} =  useQuery('students',getStudents); 
+    if(isLoading) return <div>Students are Loding...</div>
+    if(isError) return <div>got error {error}</div> 
 
  
  
-
   return (
     <>  
 
 <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-auto m-5">
-    <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900">
+    <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 fixed  pt-3 top-0 w-full ">
         
-        <label for="table-search" className="sr-only">Search</label>
+        <label  htmlFor="table-search" className="sr-only">Search</label>
         <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -25,7 +34,9 @@ export default function table(){
             <input type="text" id="table-search-users" className="block p-2 pl-10 text-sm text-gray-900 border outline-none border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users"/>
         </div>
     </div>
-    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 border">
+
+
+    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 border mt-12">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               
@@ -57,40 +68,43 @@ export default function table(){
             </tr>
         </thead>
         <tbody>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            
+        {data.map((obj,index)=>{
+            const {_id,name,email,phone,course,class_,seat_no} = obj;
+              return(   
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={_id}  >
+                    
                 <td className="px-6 py-4">
-                   1
-                  </td>
-                <td className="px-6 py-4">
-                  Mayur Sanjay shinde   
-                  </td>
-                <td className="px-6 py-4">
-                  Mayur@gmail.com
-                </td>
-                <td className="px-6 py-4">
-                    12456795122
-                </td>
-                <td className="px-6 py-4">
-                     Msc -1
+                {index + 1}
                  </td>
                 <td className="px-6 py-4">
-                     Smcca
+                   {name}
+                  </td>
+                <td className="px-6 py-4">
+                    {email}
+                </td>
+                <td className="px-6 py-4">
+                   {phone}
+                </td>
+                <td className="px-6 py-4">
+                  {course}
+                 </td>
+                <td className="px-6 py-4">
+                     {class_}
                   </td>
                   <td className="px-6 py-4">
-                     53
+                     {seat_no}
                  </td>
                  <td className="px-6 py-4">
-                    <Link href="" className="text-blue-600">Edit</Link>
+                    <Link href="" className="text-green-400" ><BiEditAlt size={20}/> </Link>
                  </td>
                  <td className="px-6 py-4">
-                    <Link href="" className="text-blue-600">Delete</Link>
+                    <Link href="" className="text-red-500" onClick={()=>deleteStudent(_id)} ><BiTrashAlt size={20}/></Link>
                  </td>
                
                
             </tr>
-            
-    
+              )
+        })}  
         </tbody>
     </table>
 </div>
