@@ -1,4 +1,4 @@
-import getAdmin from "@/controller/controller";
+import getAdmin, { login } from "@/controller/controller";
 import connectmongo from "@/database/conn";
  
 
@@ -9,9 +9,10 @@ import connectmongo from "@/database/conn";
 const {method} = req;
     switch (method) {
         case 'GET':
-           
+                 
             break; 
-        case 'POST':
+        case 'POST':  login(req,res);
+         
               
             break;
     

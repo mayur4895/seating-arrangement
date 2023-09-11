@@ -11,8 +11,13 @@ if(emailexist){
  const passwordcheck = await Admin.findOne({password});
  if(passwordcheck){
     res.status(200).json({message:"Login Successfully"})
+ }else{
+  res.status(400).json({error:"Invalid"})
  }
-} 
+
+}else{
+  res.status(400).json({error:"Invalid"})
+}
 }
 
 
@@ -52,11 +57,14 @@ export async function addstudent(req,res){
 export async function  getstudents(req,res){ 
  
   try {  
+    
     const   students = await  Student.find();
-    if(students){ 
-    return  res.status(200).json(students); 
+    if(!students){ 
+      res.status(404).json({error:"no data"});
+     
     } 
-    return res.status(404).json({error:"no data"});
+        res.json(students)
+   
      }catch (error) {
     res.status(404).json(error)
   } 
@@ -68,7 +76,8 @@ export async function  getstudent(req,res){
     const  {studentid} = req.query;
  if(studentid){
   const student = await Student.findByID({studentid});
-  return res.status(200).json(student);
+   res.status(200).json(student);
+   return
  }
  return res.status(404).json({error:"not provided"});
      }catch (error) {
@@ -77,19 +86,21 @@ export async function  getstudent(req,res){
 }
  
 
-// export async function  putstudent(req,res){  
-//   try { 
-//     const formData = req.body;  
-//     const  {studentid} = req.query;  
-//        if(studentid && formData) {  
-//           await  Student.findByIdAndUpdate(studentid,formData);   
-//         return   res.status(200).json(formData);
-//             }
-//       return res.status(404).json({error:"not provided"});
-//   } catch (error) {
-//   return  res.status(404).json(error)
-//   } 
-// }
+export async function  putStudent(req,res){  
+  try { 
+    const formData = req.body;  
+    const  {studentid} = req.query;  
+       if(studentid && formData) {  
+          await  Student.findByIdAndUpdate(studentid,formData);   
+            res.status(200).json(formData);
+            return
+            }
+      return res.status(404).json({error:"not provided"});
+  } catch (error) {
+     res.status(404).json(error)
+     return
+  } 
+}
 
 
 export async function  Deletestudent(req,res){  

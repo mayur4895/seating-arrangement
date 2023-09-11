@@ -1,5 +1,5 @@
 import connectMongo from "@/database/conn";
- import { Deletestudent } from "@/controller/controller";
+ import { Deletestudent ,getStudent,putStudent} from "@/controller/controller";
  
 export default async function handler(req, res) {
     connectMongo();

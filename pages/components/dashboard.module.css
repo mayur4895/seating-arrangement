@@ -7,12 +7,12 @@
   
   
   .active_link{
-    @apply text-white py-2   bg-blue-500   w-full    hover:bg-blue-400 px-4  hover:border-l-yellow-500 border-l-2    mb-2 cursor-pointer   flex gap-2
+    @apply text-white py-2   bg-blue-500   w-full    hover:bg-blue-400 px-4  hover:border-l-yellow-500 border-l-2     cursor-pointer   flex gap-2
  
   }
 
   ._link{
-    @apply text-white py-2  hover:bg-slate-500 px-4  hover:border-l-yellow-500 border-l-2 border-l-transparent  mb-2 cursor-pointer flex gap-2
+    @apply text-white py-2  hover:bg-slate-500 px-4  hover:border-l-yellow-500 border-l-2 border-l-transparent my-2  cursor-pointer flex gap-2
   }  
 
   .icon{

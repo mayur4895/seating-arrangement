@@ -33,21 +33,21 @@ import { getSession} from "next-auth/react"
   )
 }
 
+  
+export  async function getServerSideProps(contex){
+  const session = await getSession(contex)
+
+
+  if(!session){
+   return{
+     redirect:{
+       destination:'/admin',
+       permanent:false
+     }
+   }
+  }
+  return {
+   props:{session}
+  } 
+}
  
- export  async function getServerSideProps(contex){
-   const session = await getSession(contex)
-
-
-   if(!session){
-    return{
-      redirect:{
-        destination:'/admin',
-        permanent:false
-      }
-    }
-   }
-   return {
-    props:{session}
-   }
-
- }

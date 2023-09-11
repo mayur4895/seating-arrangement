@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import { BiAt ,BiFingerprint } from "react-icons/bi";
 import { useRouter } from 'next/router' 
 import { HiFingerPrint } from "react-icons/hi";
+import Error from "./error";
+import { useMutation  } from 'react-query';
 import styles from "./dashboard.module.css"
 import  {login_validate}  from "@/lib/validate";
 import { useState } from "react";
@@ -18,31 +20,41 @@ export default function  adminlogin(){
        email: '', password: ''
      }
  
+    
+          
    
      const { values, errors, touched, handleChange, handleSubmit } = useFormik({
        initialValues: initialValues,
       validate:login_validate,
-       onSubmit,
+       onSubmit: (values)=>{
+        loginmutation.mutate(values);
+       } 
  
      })
 
-  async function onSubmit(values){
-   const status =  await signIn('credentials',{
-      redirect:false,
-      email:values.email,
-      password:values.password,
-      callbackUrl:'/admin/dashboard'
+
+     const  loginmutation = useMutation({
+      mutationFn:  async function loginadmin(values){  
+         const status =  await signIn('credentials',{
+          redirect:false,
+          email:values.email,
+          password:values.password,
+          callbackUrl:'/admin/dashboard'
+        }) 
+
+        if(!status.ok){
+         return  alert("invalid Admin");
+        }
+        router.push('/admin/dashboard');
+      },
     })
-      if(status.ok){
-        router.push(status.url);
-      }else{
-        alert("Invalid Admin");
-      }
-  }
+ 
  
   
-   return(
+ 
+   return( 
        <main className=" w-full   h-screen  bg-blue-500"> 
+  
        <div className=" max-w-2xl  mx-auto h-screen flex items-center justify-center" > 
       <div className=" mx-auto w-full py-10 flex">
           <form className=" lg:flex-col sm:flex-col mx-2 bg-slate-50 rounded-md flex-col gap-4 py-10  w-full  shadow-md   border flex justify-center items-center" onSubmit={handleSubmit}>

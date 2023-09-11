@@ -3,25 +3,44 @@
 import styles from "./dashboard.module.css"
 import Link from "next/link";
 import { useFormik } from "formik";   
- import { useQuery  ,useMutation} from "react-query";
-import { deleteStudent, getStudents } from "@/lib/helper";
+import { useDispatch } from "react-redux";
+import Error from "./error";
+import {   updatedata } from "@/redux/slices/updateslice";
+ import { useQuery  ,useMutation,  useQueryClient } from "react-query";
+import { deleteStudent, getStudents, updateStudent } from "@/lib/helper";
   import { BiTrashAlt ,BiEditAlt } from "react-icons/bi";
+ 
 export default function table(){ 
-
-
  
 
- 
     const {isLoading,isError,data,error} =  useQuery('students',getStudents); 
-    if(isLoading) return <div>Students are Loding...</div>
-    if(isError) return <div>got error {error}</div> 
+ 
+    const queryClient = useQueryClient();
+   
+    const addmutation = useMutation({
+        mutationFn:  deleteStudent,
+        onError:()=>{
+         return router.push('/admin/dashboard/pg/addstudent'); 
+        },
+        onSuccess: async(data) => {  
+            queryClient.prefetchQuery('students',getStudents);
+        },
+      })
+   
+ 
+    
 
  
  
+ 
+    if(isLoading) return <div>Students are Loding...</div> 
+    if(isError) return <div>got error {error}</div> 
+    if(data.length <= 0)  return    <Error msg={"No Data available"}/> 
+  
   return (
     <>  
 
-<div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-auto m-5">
+<div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg mx-auto m-5">
     <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 fixed  pt-3 top-0 w-full ">
         
         <label  htmlFor="table-search" className="sr-only">Search</label>
@@ -35,7 +54,7 @@ export default function table(){
         </div>
     </div>
 
-
+ 
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 border mt-12">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -68,7 +87,10 @@ export default function table(){
             </tr>
         </thead>
         <tbody>
-        {data.map((obj,index)=>{
+            
+        {  
+        
+        data.map((obj,index)=>{ 
             const {_id,name,email,phone,course,class_,seat_no} = obj;
               return(   
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={_id}  >
@@ -95,13 +117,11 @@ export default function table(){
                      {seat_no}
                  </td>
                  <td className="px-6 py-4">
-                    <Link href="" className="text-green-400" ><BiEditAlt size={20}/> </Link>
+                    <Link href="/admin/dashboard/pg/updatestudent" className="text-green-400"   ><BiEditAlt size={20}/> </Link>
                  </td>
                  <td className="px-6 py-4">
-                    <Link href="" className="text-red-500" onClick={()=>deleteStudent(_id)} ><BiTrashAlt size={20}/></Link>
-                 </td>
-               
-               
+                    <Link href="" className="text-red-500" onClick={()=>addmutation.mutate(_id)} ><BiTrashAlt size={20}/></Link>
+                 </td>     
             </tr>
               )
         })}  
