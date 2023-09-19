@@ -1,8 +1,9 @@
  import { createSlice  ,nanoid } from "@reduxjs/toolkit";
 
- const initialState ={
-    student:[]
- }
+ const initialState =   {
+   client:{ datapass:{ 
+   }},  
+}
 
 
  const updateslice = createSlice({
@@ -10,15 +11,15 @@
     name:'data',
     initialState,
     reducers:{
-        updatedata:(state,action)=>{
-         const studata = {
-            id:nanoid(),
-            Text:action.payload
-         }
-         state.student.push(studata);
-        }
+      updatedata:(state,action)=>{  
+            state.client.datapass = action.payload;
+        },
+        
+      emptydata:(state,action)=>{ 
+         state.client.datapass.pop();
+     }
     }
  })
 
  export default updateslice.reducer;
- export const{ updatedata  } = updateslice.actions;
+ export const{ updatedata ,emptydata } = updateslice.actions;

@@ -5,17 +5,22 @@ import * as Yup from "yup";
 import { BiAt ,BiFingerprint } from "react-icons/bi";
 import { useRouter } from 'next/router' 
 import { HiFingerPrint } from "react-icons/hi";
-import Error from "./error";
+ 
 import { useMutation  } from 'react-query';
 import styles from "./dashboard.module.css"
 import  {login_validate}  from "@/lib/validate";
 import { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
+import { isError } from 'react-query';
+import Error from "@/pages/components/error";
 export default function  adminlogin(){ 
+  const router = useRouter();
+
+ 
 
   const [text , showtext] = useState(false);
 
- const router = useRouter();
+ 
    const initialValues = {
        email: '', password: ''
      }
@@ -42,15 +47,14 @@ export default function  adminlogin(){
           callbackUrl:'/admin/dashboard'
         }) 
 
-        if(!status.ok){
+        if(!status.ok ){
          return  alert("invalid Admin");
-        }
+        } 
         router.push('/admin/dashboard');
       },
     })
  
  
-  
  
    return( 
        <main className=" w-full   h-screen  bg-blue-500"> 

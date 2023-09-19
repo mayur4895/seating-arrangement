@@ -1,5 +1,5 @@
  
- import { useState } from "react"
+ import { useState ,useEffect } from "react"
 import styles from "./dashboard.module.css"
 import Link from "next/link";
 import { useFormik } from "formik";   
@@ -11,7 +11,7 @@ import { deleteStudent, getStudents, updateStudent } from "@/lib/helper";
   import { BiTrashAlt ,BiEditAlt } from "react-icons/bi";
  
 export default function table(){ 
- 
+    const dispatch = useDispatch();
 
     const {isLoading,isError,data,error} =  useQuery('students',getStudents); 
  
@@ -27,7 +27,7 @@ export default function table(){
         },
       })
    
- 
+   
     
 
  
@@ -37,6 +37,10 @@ export default function table(){
     if(isError) return <div>got error {error}</div> 
     if(data.length <= 0)  return    <Error msg={"No Data available"}/> 
   
+
+
+
+ 
   return (
     <>  
 
@@ -117,7 +121,7 @@ export default function table(){
                      {seat_no}
                  </td>
                  <td className="px-6 py-4">
-                    <Link href="/admin/dashboard/pg/updatestudent" className="text-green-400"   ><BiEditAlt size={20}/> </Link>
+                    <Link href="/admin/dashboard/pg/updatestudent" className="text-green-400"  onClick={ ()=> dispatch(updatedata(obj))}><BiEditAlt size={20}/> </Link>
                  </td>
                  <td className="px-6 py-4">
                     <Link href="" className="text-red-500" onClick={()=>addmutation.mutate(_id)} ><BiTrashAlt size={20}/></Link>

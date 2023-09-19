@@ -19,11 +19,6 @@ if(emailexist){
   res.status(400).json({error:"Invalid"})
 }
 }
-
-
-//student controller
- 
-
  
 
 export async function addstudent(req,res){ 
@@ -73,15 +68,16 @@ export async function  getstudents(req,res){
 
 export async function  getstudent(req,res){  
   try {  
-    const  {studentid} = req.query;
- if(studentid){
-  const student = await Student.findByID({studentid});
-   res.status(200).json(student);
-   return
+    const  {stuid} = req.query;
+ if(stuid){
+  const student = await Student.findByID({stuid});
+  return res.status(200).json(student);
+   
  }
  return res.status(404).json({error:"not provided"});
      }catch (error) {
-        return error
+      res.status(404).json(error);
+     return
   } 
 }
  
@@ -92,12 +88,12 @@ export async function  putStudent(req,res){
     const  {studentid} = req.query;  
        if(studentid && formData) {  
           await  Student.findByIdAndUpdate(studentid,formData);   
-            res.status(200).json(formData);
-            return
+          return    res.status(200).json(formData);
+           
             }
       return res.status(404).json({error:"not provided"});
   } catch (error) {
-     res.status(404).json(error)
+ res.status(404).json(error)
      return
   } 
 }
