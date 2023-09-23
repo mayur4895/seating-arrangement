@@ -21,7 +21,7 @@ export default function viewstudent(){
  
    
 
-
+ 
 
   const   visible = useSelector((state)=>state.dashboard.client.togglepannel); 
 

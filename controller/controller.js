@@ -1,7 +1,8 @@
 import Admin from "@/model/admin";
  import Student from "@/model/student";
-
-
+ 
+ 
+ 
 export async function  login(req,res){ 
      
 if(!req.body) return res.status(404).json({error:"Dont have form data"}); 
@@ -21,31 +22,63 @@ if(emailexist){
 }
  
 
-export async function addstudent(req,res){ 
+// export async function addstudent(req,res){ 
  
-   try { 
-      const {name ,email,phone,course,class_,seat_no}  = req.body;
+//    try { 
+      // const {name ,email,phone,course,class_,seat_no}  = req.body;
 
-        if(!name || !email || !phone || !course || !class_ || !seat_no){
-        return  res.status(400).json({Error:"all inputes are required"});
-        } 
+      //   if(!name || !email || !phone || !course || !class_ || !seat_no){
+      //   return  res.status(400).json({Error:"all inputes are required"});
+      //   } 
 
-        const studentexist =  await  Student.findOne({seat_no}) ;
-        if(studentexist){
-          return res.status(402).json({error:"student or Student_id alerday exist"});
-        } 
-        const  student = new  Student({
-         name,email,phone,course,class_,seat_no
-     })
-     const  addstudent = await  student.save();
-     if(addstudent){
-      res.status(200).json({message:"student added"});
-     } 
-      }catch (error) {
-        return res.status(404).json({error:"not provided"});
-   } 
- }
-
+//         const studentexist =  await  Student.findOne({seat_no}) ;
+//         if(studentexist){
+//           return res.status(402).json({error:"student or Student_id alerday exist"});
+//         } 
+    //     const  student = new  Student({
+    //      name,email,phone,course,class_,seat_no
+    //  })
+    //  const  addstudent = await  student.save();
+    //  if(addstudent){
+    //   res.status(200).json({message:"student added"});
+    //  } 
+//       }catch (error) {
+//         return res.status(404).json({error:"not provided"});
+//    } 
+//  }
+ 
+ 
+  
+export async function addstudent(req,res){ 
+try {
+ 
+const    source = req.body;
+var arrayToInsert = [];
+for (var i = 0; i < source.length; i++) {
+ 
+  var singleRow = {
+    name: source[i]["Name"],
+    email: source[i]["Email"],
+      phone: source[i]["Phone"],
+      class_: source[i]["Class"],
+      course: source[i]["Course"],
+      seat_no: source[i]["Seat_No"],
+  };
+  arrayToInsert.push(singleRow);
+}
+console.log(arrayToInsert);
+ Student.insertMany(arrayToInsert).then(function () {
+  console.log("Successfully saved defult items to DB");
+}).catch(function (err) {
+  console.log(err);
+});
+  res.send({status:200,success:true,msg:"uploded"});
+  return res;
+} catch (error) {
+  res.send({status:400,success:false,msg:error.message});
+}
+ 
+}
 
 
  

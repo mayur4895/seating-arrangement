@@ -1,4 +1,4 @@
-import React from 'react'
+import {React,useEffect} from 'react'
 import "../../../styles/Home.module.css"
 import { BiDotsVerticalRounded ,BiCustomize} from "react-icons/bi";
 import Dashboard from '../../components/dashboard_pannel'
@@ -20,6 +20,10 @@ import { getSession} from "next-auth/react"
     dispatch(showpannel());
   }
   const   visible = useSelector((state)=>state.dashboard.client.togglepannel); 
+
+
+ 
+  
   return (
    <>
  
