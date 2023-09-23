@@ -15,11 +15,9 @@
             state.client.datapass = action.payload;
         },
         
-      emptydata:(state,action)=>{ 
-         state.client.datapass.pop();
-     }
+     
     }
  })
 
  export default updateslice.reducer;
- export const{ updatedata ,emptydata } = updateslice.actions;
+ export const{ updatedata  } = updateslice.actions;

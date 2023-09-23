@@ -10,10 +10,15 @@ import {   updatedata } from "@/redux/slices/updateslice";
 import { deleteStudent, getStudents, updateStudent } from "@/lib/helper";
   import { BiTrashAlt ,BiEditAlt } from "react-icons/bi";
  
+ 
+ 
 export default function table(){ 
-    const dispatch = useDispatch();
-
+    const dispatch = useDispatch(); 
+ 
     const {isLoading,isError,data,error} =  useQuery('students',getStudents); 
+ 
+  
+ 
  
     const queryClient = useQueryClient();
    
@@ -22,14 +27,15 @@ export default function table(){
         onError:()=>{
          return router.push('/admin/dashboard/pg/addstudent'); 
         },
-        onSuccess: async(data) => {  
-            queryClient.prefetchQuery('students',getStudents);
+        onSuccess: async( ) => {  
+            queryClient.prefetchQuery('students',getStudents);  
+    
         },
       })
    
    
-    
-
+   
+ 
  
  
  
@@ -43,7 +49,7 @@ export default function table(){
  
   return (
     <>  
-
+ 
 <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg mx-auto m-5">
     <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 fixed  pt-3 top-0 w-full ">
         
@@ -94,13 +100,16 @@ export default function table(){
             
         {  
         
-        data.map((obj,index)=>{ 
-            const {_id,name,email,phone,course,class_,seat_no} = obj;
+        data.map((obj,index)=>{  
+            const {_id,name,email,phone,course,class_,seat_no} = obj;  
+           
               return(   
+       
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={_id}  >
-                    
+ 
                 <td className="px-6 py-4">
-                {index + 1}
+                
+                {index + 1 }
                  </td>
                 <td className="px-6 py-4">
                    {name}
@@ -124,7 +133,10 @@ export default function table(){
                     <Link href="/admin/dashboard/pg/updatestudent" className="text-green-400"  onClick={ ()=> dispatch(updatedata(obj))}><BiEditAlt size={20}/> </Link>
                  </td>
                  <td className="px-6 py-4">
-                    <Link href="" className="text-red-500" onClick={()=>addmutation.mutate(_id)} ><BiTrashAlt size={20}/></Link>
+                    <Link href="" className="text-red-500" onClick={()=>{
+                        const co =   confirm("you want to delete this Student");
+                        if(!co) return
+                        addmutation.mutate(_id)}} ><BiTrashAlt size={20}/></Link>
                  </td>     
             </tr>
               )
@@ -132,9 +144,9 @@ export default function table(){
         </tbody>
     </table>
 </div>
-
+ 
     </>
   )
 }
-
+ 
  

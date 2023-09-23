@@ -1,12 +1,24 @@
-import React from 'react'
+import {React,useEffect} from 'react'
 import { useState } from "react";
- 
+ import { useDispatch,useSelector } from 'react-redux';
 import Link from "next/link";
+import { getStudents } from '@/lib/helper';
+import { useQuery } from 'react-query';
 import { HiUser } from "react-icons/hi";
 export default function dashboard_info(){ 
 
  
-     
+  // const totalstudent = useSelector((state)=>state.stucount);  
+
+  const {isLoading,isError,data,error} =  useQuery('students',getStudents); 
+ 
+  let key, count = 0;
+
+  for (key in data) {
+      if (data.hasOwnProperty(key)) 
+          count++; 
+  }
+  
    return(
      
     <div className="  w-3/4  mx-auto  h-screen">
@@ -15,7 +27,7 @@ export default function dashboard_info(){
      
       <HiUser size={25} className='text-blue-500'/>
        <h4> Total Pg Student</h4>
-        <h3 className=' text-lg'> 400</h3>
+        <h3 className=' text-lg'>{count}</h3>
      
     </div>
  
