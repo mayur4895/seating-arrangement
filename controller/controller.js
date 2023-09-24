@@ -69,6 +69,7 @@ for (var i = 0; i < source.length; i++) {
 console.log(arrayToInsert);
  Student.insertMany(arrayToInsert).then(function () {
   console.log("Successfully saved defult items to DB");
+  
 }).catch(function (err) {
   console.log(err);
 });
@@ -143,5 +144,29 @@ export async function  Deletestudent(req,res){
       return res.status(404).json({error:"not provided"});
   } catch (error) {
    return res.status(404).json(error)
+  } 
+}
+
+
+
+export async function   searchstudents(req,res){ 
+ 
+ 
+  try {  
+    
+    const   students = await  Student.find();
+    if(!students){ 
+      res.status(404).json({error:"no data"}); 
+    } 
+    const  {query} = req.query;  
+ 
+    const filterstudents = students.filter(( stu,i)=>{ 
+        return stu.name.toLowerCase().includes(query.toLowerCase()) || stu.seat_no.toLowerCase().includes(query.toLowerCase()) || stu.class_.toLowerCase().includes(query.toLowerCase())
+    }) 
+    
+  return  res.status(200).json(filterstudents);
+   
+     }catch (error) {
+    res.status(404).json(error)
   } 
 }

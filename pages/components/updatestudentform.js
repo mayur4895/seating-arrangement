@@ -68,7 +68,7 @@ const  updatemutaion = useMutation({
   <div className="w-full   flex flex-col gap-3 ">
     <div className="w-full relative mt-1">
     <div>   
-      <input type="text" name="name" placeholder="Name" onChange={handleChange} value={values.name ||  obj.name}       className={styles.input} />
+      <input type="text" name="name" placeholder="Name" onChange={handleChange} value={values.name  }       className={styles.input} />
       <span className={styles.icon}>    <BiUser size={20} ></BiUser></span>
     </div>
        
