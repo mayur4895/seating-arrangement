@@ -9,6 +9,7 @@ import {   updatedata } from "@/redux/slices/updateslice";
  import { useQuery  ,useMutation,  useQueryClient } from "react-query";
 import { deleteStudent, getStudents, SearchStudent } from "@/lib/helper";
   import { BiTrashAlt ,BiEditAlt } from "react-icons/bi";
+import { NextRequest } from "next/server";
  
  
  
@@ -65,7 +66,7 @@ export default function table(){
     
  
     if(isLoading) return <div>Students are Loding...</div> 
-    if(isError) return <div>got error {error}</div> 
+    if(isError || error) return <div>got error {error}</div> 
     if(data.length <= 0)  return    <Error msg={"No Data available"}/> 
   
 

@@ -26,7 +26,7 @@ export default function dashboard_info(){
     <div className=" h-auto  w-full  flex gap-4 items-center bg-slate-50 rounded-md p-3 shadow-md border">
      
       <HiUser size={25} className='text-blue-500'/>
-       <h4> Total Pg Student</h4>
+       <h4> Total Ug Student</h4>
         <h3 className=' text-lg'>{count}</h3>
      
     </div>
@@ -34,7 +34,7 @@ export default function dashboard_info(){
     <div className="   flex gap-4 items-center bg-slate-50 rounded-md p-3 shadow-md border">
      
       <HiUser size={25}/> 
-       <h4> Total Ug Student</h4>
+       <h4> Total Pg Student</h4>
        <h3 className=' text-lg'> 400</h3>
     
     </div>

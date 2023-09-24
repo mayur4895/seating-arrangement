@@ -22,30 +22,33 @@ if(emailexist){
 }
  
 
-// export async function addstudent(req,res){ 
+export async function addssinglestudent(req,res){  
  
-//    try { 
-      // const {name ,email,phone,course,class_,seat_no}  = req.body;
+ 
+   try { 
+      const {name ,email,phone,course,class_,seat_no}  = req.body;
 
-      //   if(!name || !email || !phone || !course || !class_ || !seat_no){
-      //   return  res.status(400).json({Error:"all inputes are required"});
-      //   } 
-
-//         const studentexist =  await  Student.findOne({seat_no}) ;
-//         if(studentexist){
-//           return res.status(402).json({error:"student or Student_id alerday exist"});
-//         } 
-    //     const  student = new  Student({
-    //      name,email,phone,course,class_,seat_no
-    //  })
-    //  const  addstudent = await  student.save();
-    //  if(addstudent){
-    //   res.status(200).json({message:"student added"});
-    //  } 
-//       }catch (error) {
-//         return res.status(404).json({error:"not provided"});
-//    } 
-//  }
+        if(!name || !email || !phone || !course || !class_ || !seat_no){
+        return  res.status(400).json({Error:"all inputes are required"});
+        } 
+ console.log("hii");
+        const studentexist =  await  Student.findOne({seat_no}) ;
+        if(studentexist){
+          return res.status(402).json({error:"student or Student_id alerday exist"});
+        } 
+     
+    
+     const  student = new  Student({
+      name,email,phone,course,class_,seat_no
+  })
+     const  addstudent = await  student.save();
+     if(addstudent){
+      res.status(200).json({message:"student added"});
+     } 
+      }catch (error) {
+        return res.status(404).json({error:"not provided"});
+   } 
+ }
  
  
   

@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "bcrypt": "^5.1.1",
     "csvtojson": "^2.0.10",
+    "file-type": "^18.5.0",
     "formik": "^2.4.3",
     "mongoose": "^7.3.2",
     "mui-datatables": "^4.3.0",
